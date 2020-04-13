@@ -7,10 +7,7 @@
     "mobile": "tns run",
     "preview": "tns preview ",
     "ng": "ng",
-    
-  
     "postinstall": "ng build --prod",
-   
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
