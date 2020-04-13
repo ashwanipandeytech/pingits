@@ -7,7 +7,7 @@
     "mobile": "tns run",
     "preview": "tns preview",
     "ng": "ng",
-    "start": "concurrently \"ng serve\" \"nodemon server.js\"" ,
+    "start": "server.js" ,
      "heroku-postbuild": "ng build --prod",
     "build": "ng build",
     "test": "ng test",
