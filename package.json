@@ -65,5 +65,9 @@
   },
   "nativescript": {
     "id": "org.nativescript.ngsample"
+  },
+  "engines": {
+    "node": "10.19.0",
+    "npm": "6.13.4"
   }
 }
