@@ -19,9 +19,9 @@ app.use('/api', routes);
 // });
 
 
-app.use(express.static(__dirname + '/dist/'));
+app.use(express.static(__dirname + '/dist/frontent'));
 app.get('/*', function(req,res) {
-res.sendFile(path.join(__dirname+'/dist/index.html'));
+res.sendFile(path.join(__dirname+'/dist/frontent/index.html'));
 });
 
 mongoose.connect('mongodb://127.0.0.1:27017/mean_tutorial');
