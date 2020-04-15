@@ -1,0 +1,82 @@
+<div class="sidebar-header">
+    <a routerLink="/dashboard" routerLinkActive="active">
+        <img src="assets/images/pflogo.png" alt="logo" (click)="setPanelsDropdowns(leftSideNoDropdown)" />
+    </a>
+</div>
+
+<div class="left_side_content">
+    <nav id="sidebar">
+        <div class="sidebar-filter">
+            <!-- <span>{{'SELECT_INT_KEYS' | translate}}</span> -->
+            <i class="fas fa-filter"></i>
+            <div class="filter-content">
+
+
+                <mat-form-field *ngIf="displayGroupDropdown">
+                    <mat-select id="selectbox" [(ngModel)]="selectedGroup" name="group" (ngModelChange)="getGroupOems();disablefilter=false;" [ngModelOptions]="{standalone: true}">
+                        <mat-option [value]="'NONE'"> {{'GROUP_CODE' | translate }}</mat-option>
+                        <mat-option *ngFor="let group of groupData " [value]="group.groupCode">{{group.groupCode}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <!-- <select *ngIf="displayOemDropdown" class="form-control" id="selectbox" [(ngModel)]="selectedOem" name="oem" (ngModelChange)="getOemLanguages(selectedOem);disablefilter=false;" [ngModelOptions]="{standalone: true}">
+                    <option  [value]="'NONE'"> {{'SELECT_ALL_OEM' | translate }}</option>
+                    <option *ngFor="let oem of oemData " [value]="oem.oemCode"> {{oem.oemCode}}</option>
+                </select> -->
+
+                <mat-form-field *ngIf="displayOemDropdown">
+                    <mat-select id="selectbox" [(ngModel)]="selectedOem" name="oem" (ngModelChange)="getOemLanguages();disablefilter=false;" [ngModelOptions]="{standalone: true}">
+                        <mat-option [value]="'NONE'"> {{'SELECT_ALL_OEM' | translate }}</mat-option>
+                        <mat-option *ngFor="let oem of oemData " [value]="oem.oemCode">{{oem.oemCode}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <!--
+                <select *ngIf="displayLanguageDropdown" class="form-control" id="selectbox" [(ngModel)]="selectedLanguage" name="group" (ngModelChange)="getGroupOems(selectedGroup);disablefilter=false;" [ngModelOptions]="{standalone: true}">
+                    <option *ngFor="let language of languageData " [value]="language.langCode"> {{language.langCode}}</option>
+                </select> -->
+                <mat-form-field *ngIf="displayLanguageDropdown">
+                    <mat-select [(ngModel)]="selectedLanguage" name="group" (ngModelChange)="getGroupOems();disablefilter=false;" [ngModelOptions]="{standalone: true}">
+                        <mat-option *ngFor="let language of languageData " [value]="language.langCode">{{language.langCode}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <button *ngIf="displayGroupDropdown || displayOemDropdown || displayLanguageDropdown" type="button" [disabled]="disablefilter" class="btn" color="primary" mat-raised-button (click)="loadData();disablefilter=true;">{{'LANG_FILTER' | translate }}</button>
+            </div>
+
+            <!-- <div class="themeCheckBox">
+
+                <mat-form-field>
+
+                    <mat-select [(ngModel)]="selectedTheme" name="group" (ngModelChange)="ThemeService.toggleTheme(selectedTheme); " [ngModelOptions]="{standalone: true}">
+                        <mat-option [value]="'lightTheme'">{{'LIGHT_THEME' |translate}}</mat-option>
+                        <mat-option [value]="'darkTheme'">{{'DARK_THEME' |translate}}</mat-option>
+                        <mat-option [value]="'greenTheme'">{{'GREEN_THEME' |translate}}</mat-option>
+                        <mat-option [value]="'redTheme'">{{'RED_THEME' |translate}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div> -->
+        </div>
+
+        <div class="spacerclass"></div>
+        <div class="sidebar-content">
+            <div class="customScrollbar">
+                <ul class="list" id="accordionEx" role="tablist" aria-multiselectable="true">
+                    <ng-container *ngFor="let modules of moduleData;let i = index;">
+
+                        <li class="list-item" role="tab" id="section{{i}}">
+                            <a class="link" (click)="addClassToUl(i ,modules)">
+                                <i class="fa fa-home"></i> <span>{{modules.menuName | translate}}<i class="fa fa-angle-down"></i></span>
+                            </a>
+                            <ul class="sub-list" id="showhide{{i}}">
+                                <li class="list-item" *ngFor="let submodules of modules['subModuleData'];">
+                                    <a class="link" routerLink="/{{submodules.route}}" routerLinkActive="active" (click)="setPanelsDropdowns(submodules)">{{submodules.menuName | translate}}</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ng-container>
+                </ul>
+            </div>
+            <!-- <div class="cover-bar"></div> -->
+        </div>
+    </nav>
+</div>

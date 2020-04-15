@@ -1,0 +1,81 @@
+@import "src/assets/styles/scss/variables.scss";
+@import "src/assets/styles/scss/mixins.scss";
+.wrapper {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+
+    .sidebarwrapper {
+        position: relative;
+        height: 100vh; 
+        background: var(--theme-color-2);
+    }
+    
+    #content {
+        width: 100%;
+        height: 100vh;
+        -webkit-transition: all 0.5s;
+        transition: all 0.5s;
+        //right panel
+        .routecontent {
+            width: calc(100% - 250px);
+            height: calc(100% - 80px);
+            overflow-y: auto;
+            position: fixed;
+            margin-top: 56px;
+            padding-top: 15px;
+            @include scrollbar;
+            @include breakpoint(laptop) {
+                width: calc(100%);
+            }
+            @include breakpoint(mobile) {
+                height: calc(100% - 38px);
+            }
+            &.accesnotgranted {
+                width: 100%;
+                height: 100%;
+                background:#e9ecef;
+                margin-top: 0px;
+            }
+        }
+        
+        //top panel navbar
+        .top_navbar {
+            position: fixed;
+            top: 0;
+            left: 250px;
+            right: 0;
+            background: var(--theme-color-2);
+            -webkit-transition: all 0.5s;
+            transition: all 0.5s;
+            @include boxShadow(0,1px,5px,.04);
+            z-index: 10;
+            @include breakpoint(laptop) {
+                left: 0;
+            }
+        }
+        &.collapsed {
+            .routecontent {
+                width: calc(100% - 65px);
+                @include breakpoint(laptop) {
+                    width: calc(100% - 250px);
+                }
+                @include breakpoint(mobile) {
+                    width: calc(100%);
+                }
+            }
+            .top_navbar {
+                left: 65px;
+                @include breakpoint(laptop) {
+                    left: 250px;
+                    right: 0;
+                }
+                @include breakpoint(mobile) {
+                    left: 250px;
+                    right: -65px;
+                }
+            }
+        }
+    }
+}

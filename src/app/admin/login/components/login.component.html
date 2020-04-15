@@ -1,0 +1,155 @@
+<div class="login_wrapper">
+    <mat-card class="marginauto">
+
+        <mat-card-header>
+            <mat-card-title>
+                <div class="text-center">
+                    {{(!alreadyAccount)?'CREATE_YOUR_PINGIT_ACCOUNT':'SIGNIN_TO_ACCOUNT' |translate}}
+                </div>
+
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form class="example-form" (submit)="reegisterUser(loginOrRegisterformdata)" #userForm="ngForm">
+                <table class="col-md-12" cellspacing="0">
+                    <tr [hidden]="alreadyAccount">
+                        <td>
+                            <mat-form-field class="col-md-12">
+                                <mat-placeholder class="placeholder">{{'FIRSTNAME' |translate }}</mat-placeholder>
+                                <input matInput id="firstname" #firstname="ngModel" required [(ngModel)]="loginOrRegisterformdata.firstname" [ngModelOptions]="{standalone: true}" required>
+                            </mat-form-field>
+                            <div *ngIf="firstname.touched" class="col-md-12">
+                                    <div *ngIf="firstname.errors?.required" [translate]="'FIRSTNAME_REQUIRED'" class="invalid-error"></div>
+                                </div>
+                       
+                            
+                        </td>
+                    </tr>
+                    <tr [hidden]="alreadyAccount">
+                        <td>
+                            
+                                <mat-form-field class="col-md-12">
+                                    <mat-placeholder class="placeholder">{{'LASTNAME' |translate }}</mat-placeholder>
+                                    <input matInput id="lastname" #lastname="ngModel" [(ngModel)]="loginOrRegisterformdata.lastname" [ngModelOptions]="{standalone: true}" required>
+                                </mat-form-field>
+                                <div *ngIf="lastname.touched"  class="col-md-12">
+                                    <div *ngIf="lastname.errors?.required" [translate]="'LASTNAME_REQUIRED'" class="invalid-error"></div>
+                                </div>
+                            
+                           
+                        </td>
+                    </tr>
+                    <tr [hidden]="alreadyAccount">
+                        <td>
+                            <mat-form-field class="col-md-12">
+                                <mat-placeholder class="placeholder">{{'EMAIL' |translate }}</mat-placeholder>
+                                <input matInput id="email" #email="ngModel" [(ngModel)]="loginOrRegisterformdata.email" [ngModelOptions]="{standalone: true}" required>
+                            </mat-form-field>
+                            <div *ngIf="email.touched" class="col-md-12">
+                                <div *ngIf="email.errors?.required" [translate]="'EMAIL_REQUIRED'" class="invalid-error"></div>
+                            </div>
+                       
+                           
+                        </td>
+                    </tr>
+                    <tr >
+                        <td>
+                           
+                                <mat-form-field class="col-md-12">
+                                    <mat-placeholder class="placeholder">{{'USERNAME' |translate }}</mat-placeholder>
+                                    <input matInput id="username" #username="ngModel" [(ngModel)]="loginOrRegisterformdata.username" [ngModelOptions]="{standalone: true}" required>
+                                </mat-form-field>
+                                <div *ngIf="username.touched" class="col-md-12">
+                                    <div *ngIf="username.errors?.required" [translate]="'USERNAME_REQUIRED'" class="invalid-error"></div>
+                                </div>
+                           
+                           
+                        </td>
+                    </tr>
+                  
+                    <tr>
+                        <td> 
+                        
+                            <mat-form-field class="col-md-12">
+                                <mat-placeholder class="placeholder">{{'PASSWORD' |translate }}</mat-placeholder>
+                                <input matInput type="password" name="Password"  #Password="ngModel"  id="password" [(ngModel)]="loginOrRegisterformdata.password" [ngModelOptions]="{standalone: true}" required>
+                            
+                            </mat-form-field>
+                            <div *ngIf="Password.touched" class="col-md-12" >
+                                <div *ngIf="Password.errors?.required" [translate]="'PASSWORD_REQUIRED'" class="invalid-error"></div>
+                            </div>
+                       
+                          
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="col-md-12">
+                                <button mat-flat-button color="primary" (click)="loginUser(loginOrRegisterformdata)" class=" btn-block" *ngIf="alreadyAccount"  [disabled]="(username.errors?.required ||Password.errors?.required)" >{{'SIGNIN' |translate}}</button>
+                                <button mat-flat-button color="primary" (click)="reegisterUser(loginOrRegisterformdata)" class=" btn-block" *ngIf="!alreadyAccount" [disabled]="(firstname.errors?.required || lastname.errors?.required || username.errors?.required || email.errors?.required || Password.errors?.required)" >{{'REGISTER' |translate}}</button>
+                                <div class="text-center">
+                                    <span class="ml-3 mt-2" *ngIf="showloader"><img src="assets/images/loadingicon.gif"></span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+
+        </mat-card-content>
+        <mat-card-actions>
+            
+            <div class="text-right">
+                <span class="ml-3 mt-2" > 
+                    <mat-slide-toggle  class="example-margin" (toggleChange)="alreadyAccount=!alreadyAccount;" (click)="resetUserForm(userForm)" [color]="'primary'">{{'DONT_HAVE_AN_ACCOUNT' |translate}}                 
+                    </mat-slide-toggle>
+                 </span>
+            </div>
+           
+
+        </mat-card-actions>
+    </mat-card>
+</div>
+<ng-template #loginotp>
+    <div class="modal-body text-center btn_type_1">
+        <mat-card class="otpbox">
+
+            <mat-card-header>
+                <mat-card-title>
+                    <div class="text-center">
+                        {{'VERIFY_OTP' |translate }}
+                    </div>
+
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <form class="example-form" (keydown)="keyDownFunctionotp($event,otp,modalRef)">
+                    <!-- (keydown)="keyDownFunctionotp($event,otp,modalRef)" -->
+                    <table class="col-md-12" cellspacing="0">
+                        <tr>
+                            <td>
+                                <mat-form-field class="col-md-12">
+                                    <mat-placeholder class="placeholder">{{'ENTER_OTP' |translate }}</mat-placeholder>
+                                    <input matInput id="otp" [(ngModel)]="otp" [ngModelOptions]="{standalone: true}" required>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </mat-card-content>
+            <mat-card-actions>
+                <div class="btn_type_1 text-center">
+                    <button (click)="modalRef.hide();otpboxopen=false;" class="btn primary mr-3">{{'CANCEL'  |translate }}</button>
+                    <button (click)="verifyotp(otp,modalRef)" class="btn primary" [disabled]="otp==''">{{'SUBMIT_OTP'   |translate}}</button>
+
+                </div>
+                <div class="text-center">
+                    <span class="ml-3 mt-2" *ngIf="showloader"><img src="assets/images/loadingicon.gif"></span>
+                </div>
+
+
+            </mat-card-actions>
+        </mat-card>
+
+    </div>
+</ng-template>

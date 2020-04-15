@@ -1,1 +1,119 @@
 /* You can add global styles to this file, and also import other style files */
+
+// Import common styles
+@import "src/assets/styles/scss/variables.scss";
+@import "src/assets/styles/scss/mixins.scss";
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+$theme-color-1:#3d4051;
+$theme-color-2: #ced4d4;
+$theme-color-3:#ffffff;
+$theme-color-4: #f6f6f6;
+$theme-color-5: #000;
+$danger: #d12f2f;
+$arrowColor: #555 !default;
+:root {
+    --theme-color-1: #{$theme-color-1};
+    --theme-color-2: #{$theme-color-2};
+    --theme-color-3: #{$theme-color-3};
+    --theme-color-4: #{$theme-color-4};
+    --theme-color-5: #{$theme-color-5};
+    --danger-color: #{$danger};
+    --arrow-color: #{$arrowColor};
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: var(--theme-color-1);
+    background-color: var(--theme-color-3);
+    @include breakpoint(laptop) {
+        font-size: 14px;
+    }
+}
+
+.invalid-error {
+    margin-top: -20px;
+}
+
+.table td,
+.table th {
+    padding: 8px;
+    vertical-align: middle;
+    // border: 1px solid #dee2e6;
+}
+
+label {
+    margin-bottom: 0;
+}
+
+.btn {
+    cursor: pointer;
+    font-weight: 300;
+    color: var(--theme-color-1);
+    background-color: var(--theme-color-3);
+    border-color: var(--theme-color-2);
+    text-decoration: none;
+    &.focus,
+    &:focus,
+    &:hover,
+    &:not(:disabled):not(.disabled):active,
+    &:not(:disabled):not(.disabled):active:focus,
+    &:not(:disabled):not(.disabled).active:focus {
+        color: var(--theme-color-1);
+        background-color: var(--theme-color-4);
+        border-color: var(--theme-color-2);
+    }
+}
+
+.btn-shadow {
+    box-shadow: 0 0 8px rgba(var(--theme-color-5), .5);
+    &.focus,
+    &:focus,
+    &:hover,
+    &:not(:disabled):not(.disabled):active,
+    &:not(:disabled):not(.disabled):active:focus,
+    &:not(:disabled):not(.disabled).active:focus {
+        box-shadow: 0 0 3px rgba(var(--theme-color-5), .3);
+    }
+}
+
+.btn-link {
+    background-color: transparent;
+    &.focus,
+    &:focus,
+    &:hover,
+    &:not(:disabled):not(.disabled):active,
+    &:not(:disabled):not(.disabled):active:focus,
+    &:not(:disabled):not(.disabled).active:focus {
+        color: var(--theme-color-1);
+        background-color: transparent;
+        border-color: transparent;
+    }
+}
+
+.head-title {
+    font-size: 24px;
+}
+
+select.form-control {
+    border-radius: 0;
+    color: var(--theme-color-1);
+}
+
+.table {
+    color: var(--theme-color-1);
+}
+
+.invalid-error {
+    display: block;
+    width: 100%;
+    // margin-top: .25rem;
+    font-size: 80%;
+    color: var(--danger-color);
+}
+
+.error {
+    color: var(--danger-color);
+}
+
+

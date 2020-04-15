@@ -10,9 +10,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors())
 app.use('/api', routes);
-app.use(express.static(__dirname + '/dist/frontend'));
+app.use(express.static(__dirname + '/src'));
 app.get('/*', function(req,res) {
-res.sendFile(path.join(__dirname+'/dist/frontend/index.html'));
+res.sendFile(path.join(__dirname+'/index.html'));
 });
 
 mongoose.connect('mongodb+srv://pingit:pingit@cluster0-oqsqu.mongodb.net/pingit?retryWrites=true&w=majority');

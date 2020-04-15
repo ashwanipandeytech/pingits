@@ -1,0 +1,22 @@
+.login_wrapper {
+    max-width: 400px;
+    margin: 0 auto;
+    position: absolute;
+    width: 100%;
+    top: 40%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+// .login_wrapper mat-card {
+//     box-shadow: none;
+// }
+
+.marginauto {
+    margin: auto;
+    margin-top: 16%;
+}
+.routecontent{
+    background: black;
+}
